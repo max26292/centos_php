@@ -5,14 +5,17 @@ RUN yum install wget -y
 RUN yum install httpd -y
 #RUN systemctl start httpd.service
 #RUN systemctl enable httpd
-RUN yum install mysql-server -y
+# RUN yum install mysql-server -y
 #RUN systemctl start mysqld
 # RUN mysql_secure_installation -y
 #RUN systemctl enable mariadb.service
+RUN wget http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
+RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
 RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
 RUN yum install http://rpms.remirepo.net/enterprise/remi-release-6.rpm -y
 RUN  yum install yum-utils -y
 RUN  yum-config-manager --enable remi-php71
+RUN yum install mysql-community-server -y
 #RUN yum install php-xxx
 #RUN yum --enablerepo=remi-php71-test install php-xxx
 RUN yum install php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo -y
@@ -30,7 +33,11 @@ COPY start.sh /usr/local/bin/
 COPY config_mysql.sh /usr/local/bin/
 COPY run-httpd.sh /usr/local/bin/
 COPY supervisord.conf /etc/supervisord.conf
-
+############### config files 
+COPY php.ini /etc/
+##############################
+######### change permission ##
+#############################
 RUN chmod 755 /usr/local/bin/start.sh
 RUN chmod -v +x /usr/local/bin/start.sh
 RUN chmod 755 /usr/local/bin/config_mysql.sh
