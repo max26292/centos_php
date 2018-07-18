@@ -34,7 +34,9 @@ ADD ./supervisord.conf /etc/supervisord.conf
 RUN chmod 755 /start.sh
 RUN chmod 755 /config_mysql.sh
 RUN /config_mysql.sh
-RUN /run-httpd.sh
+RUN /docker-entrypoint.sh
 RUN chkconfig mysqld on
 RUN chkconfig httpd on
+CMD ["mysqld_safe"]
+CMD ["exec /usr/sbin/apachectl -D FOREGROUND"]
 #CMD ["/bin/bash", "/start.sh"]

@@ -1,3 +1,3 @@
 rm -rf /run/httpd/*
 
-#exec service httpd start
+exec /usr/sbin/apachectl -D FOREGROUND
