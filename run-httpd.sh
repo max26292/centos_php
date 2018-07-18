@@ -1,3 +1,3 @@
 rm -rf /run/httpd/*
 
-exec service httpd start
+#exec service httpd start
