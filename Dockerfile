@@ -35,8 +35,12 @@ RUN chmod 755 /start.sh
 RUN chmod 755 /config_mysql.sh
 RUN /config_mysql.sh
 RUN /docker-entrypoint.sh
-RUN chkconfig mysqld on
-RUN chkconfig httpd on
+# RUN chkconfig mysqld on
+# RUN chkconfig httpd on
+# CMD ["mysqld_safe"]
+# CMD ["exec /usr/sbin/apachectl -D FOREGROUND"]
+# #CMD ["/bin/bash", "/start.sh"]
+## testing 
+# ENTRYPOINT [ "/user/sbin" ]
+ENTRYPOINT ['httpd',"-D", "FOREGROUND"]
 CMD ["mysqld_safe"]
-CMD ["exec /usr/sbin/apachectl -D FOREGROUND"]
-#CMD ["/bin/bash", "/start.sh"]
