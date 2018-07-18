@@ -24,17 +24,17 @@ EXPOSE 8080
 
 WORKDIR /var/www/html
 ### test run service script
-ADD docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod -v +x /docker-entrypoint.sh
-### mysql script
-ADD ./start.sh /start.sh
-ADD ./config_mysql.sh /config_mysql.sh
-ADD ./supervisord.conf /etc/supervisord.conf
+COPY run-httpd.sh /usr/local/bin/
 
-RUN chmod 755 /start.sh
-RUN chmod 755 /config_mysql.sh
-RUN ./config_mysql.sh
-RUN ./docker-entrypoint.sh
+### mysql script
+COPY start.sh /usr/local/bin/
+COPY config_mysql.sh /usr/local/bin/
+COPY supervisord.conf /etc/supervisord.conf
+
+RUN chmod 755 /usr/local/bin/start.sh
+RUN chmod 755 /usr/local/bin/config_mysql.sh
+#RUN ./config_mysql.sh
+#RUN ./docker-entrypoint.sh
 # RUN chkconfig mysqld on
 # RUN chkconfig httpd on
 # CMD ["mysqld_safe"]
@@ -42,5 +42,6 @@ RUN ./docker-entrypoint.sh
 # #CMD ["/bin/bash", "/start.sh"]
 ## testing 
 # ENTRYPOINT [ "/user/sbin" ]
-ENTRYPOINT ['httpd',"-D", "FOREGROUND"]
-CMD ["mysqld_safe"]
+RUN ln -s usr/local/bin/start.sh / # backwards compat
+ENTRYPOINT ["start.sh"]
+#CMD ["mysqld_safe"]

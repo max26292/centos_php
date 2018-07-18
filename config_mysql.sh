@@ -6,7 +6,7 @@ echo "Running the mysql_config function."
 #yum -y install mysql mysql-server
 mysql_install_db
 chown -R mysql:mysql /var/lib/mysql
-/usr/bin/mysqld_safe & 
+/usr/bin/mysqld_safe &
 sleep 10
 }
 
@@ -26,3 +26,4 @@ sleep 10
 __mysql_config
 __start_mysql
 #exec service mysqld
+exec mysqld_safe

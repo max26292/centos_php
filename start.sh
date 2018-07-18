@@ -1,3 +1,4 @@
+#!/bin/sh
 __run_supervisor() {
 echo "Running the run_supervisor function."
 supervisord -n
@@ -9,6 +10,8 @@ supervisord -n
 
 # }
 # # Call all functions
-# exec bash -c "./config_mysql.sh"
-# exec bash -c "./docker-entrypoint.sh"
+sh -x ./config_mysql.sh & ./run-httpd.sh
+
 __run_supervisor
+exit 1
+
