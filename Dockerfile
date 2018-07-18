@@ -24,15 +24,17 @@ EXPOSE 8080
 
 WORKDIR /var/www/html
 ### test run service script
-COPY run-httpd.sh /usr/local/bin/
 
 ### mysql script
 COPY start.sh /usr/local/bin/
-COPY config_mysql.sh /usr/local/bin/
+COPY config_mysql.sh /
+COPY run-httpd.sh /
+
 COPY supervisord.conf /etc/supervisord.conf
 
 RUN chmod 755 /usr/local/bin/start.sh
-RUN chmod 755 /usr/local/bin/config_mysql.sh
+RUN chmod -v +x /usr/local/bin/start.sh
+RUN chmod 755 /config_mysql.sh
 #RUN ./config_mysql.sh
 #RUN ./docker-entrypoint.sh
 # RUN chkconfig mysqld on
