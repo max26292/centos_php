@@ -36,4 +36,4 @@ RUN chmod 755 /start.sh
 RUN chmod 755 /config_mysql.sh
 RUN /config_mysql.sh
 
-CMD ["/bin/bash", "/start.sh"]
+# CMD ["/bin/bash", "/start.sh"]
