@@ -1,6 +1,7 @@
 
 #config hostname
 SERVER_NAME_FILE=/etc/httpd/conf.d/servername.conf
+
 if [ ! -f "$SERVER_NAME_FILE" ]; then
   echo "ServerName $(hostname)" > $SERVER_NAME_FILE
 fi
@@ -11,4 +12,4 @@ rm -rf /var/run/httpd/*
 
 
 # run apache
-exec httpd -DFOREGROUND
+exec service httpd start
