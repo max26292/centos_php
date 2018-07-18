@@ -26,7 +26,6 @@ WORKDIR /var/www/html
 ### test run service script
 ADD run-httpd.sh /run-httpd.sh
 RUN chmod -v +x /run-httpd.sh
-CMD ["/run-httpd.sh"]
 ### mysql script
 ADD ./start.sh /start.sh
 ADD ./config_mysql.sh /config_mysql.sh
@@ -34,6 +33,6 @@ ADD ./supervisord.conf /etc/supervisord.conf
 
 RUN chmod 755 /start.sh
 RUN chmod 755 /config_mysql.sh
-RUN /config_mysql.sh
-
-# CMD ["/bin/bash", "/start.sh"]
+#RUN /config_mysql.sh
+#CMD ["/run-httpd.sh"]
+#CMD ["/bin/bash", "/start.sh"]
