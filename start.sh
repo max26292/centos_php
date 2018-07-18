@@ -13,5 +13,5 @@ echo "Running all server services"
 sh -x ./config_mysql.sh & ./run-httpd.sh
 
 __run_supervisor
-exit 1
+
 
