@@ -1,7 +1,7 @@
 #!/bin/sh
 __run_supervisor() {
-echo "Running the run_supervisor function."
-supervisord -n
+echo "Running all server services"
+#
 }
 # __run_sql(){
 
