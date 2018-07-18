@@ -27,14 +27,14 @@ WORKDIR /var/www/html
 
 ### mysql script
 COPY start.sh /usr/local/bin/
-COPY config_mysql.sh /
-COPY run-httpd.sh /
-
+COPY config_mysql.sh /usr/local/bin/
+COPY run-httpd.sh /usr/local/bin/
 COPY supervisord.conf /etc/supervisord.conf
 
 RUN chmod 755 /usr/local/bin/start.sh
 RUN chmod -v +x /usr/local/bin/start.sh
-RUN chmod 755 /config_mysql.sh
+RUN chmod 755 /usr/local/bin/config_mysql.sh
+RUN chmod 755 /usr/local/bin/run-httpd.sh
 #RUN ./config_mysql.sh
 #RUN ./docker-entrypoint.sh
 # RUN chkconfig mysqld on
