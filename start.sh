@@ -4,4 +4,6 @@ supervisord -n
 }
 
 # Call all functions
+exec bash -c "./config_mysql.sh"
+exec bash =c "./docker-entrypoint.sh"
 __run_supervisor
