@@ -12,4 +12,4 @@ rm -rf /var/run/httpd/*
 
 
 # run apache
-exec service httpd start
+exec  service httpd start

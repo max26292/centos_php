@@ -25,4 +25,4 @@ sleep 10
 # Call all functions
 __mysql_config
 __start_mysql
-exec service mysqld start
+exec service mysqld
