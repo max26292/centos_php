@@ -14,6 +14,7 @@ RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noa
 RUN RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
 RUN yum -y update
 RUN yum -y install phpmyadmin
+RUN yum -y install nano
 RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
 RUN yum install http://rpms.remirepo.net/enterprise/remi-release-6.rpm -y
 RUN  yum install yum-utils -y
