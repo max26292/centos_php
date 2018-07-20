@@ -44,6 +44,7 @@ ENV MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log"
 ###
 RUN groupadd -g ${MY_GID} -r ${MY_GROUP} && \
 	adduser ${MY_USER} -u ${MY_UID} -M -s /sbin/nologin -g ${MY_GROUP}
+#########
 
 RUN \
 	yum -y install epel-release && \
