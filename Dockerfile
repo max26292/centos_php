@@ -11,20 +11,22 @@ RUN yum install httpd -y
 #RUN systemctl enable mariadb.service
 
 ##install mysql - php myadmin 
-RUN wget http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
-RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
+# RUN wget http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
+# RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+# RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
 RUN yum -y update
 RUN yum install -y yum-utils
+
 RUN yum -y install phpmyadmin
 RUN yum -y install nano
 RUN yum install mysql-community-server -y
 ## install php 7.7
 #RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+# RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
 #RUN rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
 
 RUN yum-config-manager --enable remi-php71
+RUN yum install php71
 #RUN yum install php-xxx
 #RUN yum --enablerepo=remi-php71-test install php-xxx
 RUN yum install -y php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo 
