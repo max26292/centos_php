@@ -4,10 +4,15 @@ echo "Running the mysql_config function."
 #yum -y erase mysql mysql-server
 #rm -rf /var/lib/mysql/ /etc/my.cnf
 #yum -y install mysql mysql-server
+grep 'temporary password' /var/log/mysqld.log
+mysql_secure_installation
+/usr/bin/mysqladmin -u root password ''
 mysql_install_db
 chown -R mysql:mysql /var/lib/mysql
 /usr/bin/mysqld_safe &
+#/etc/httpd/conf.d/phpMyAdmin.conf
 sleep 10
+
 }
 
 __start_mysql() {
@@ -24,6 +29,6 @@ sleep 10
 
 # Call all functions
 __mysql_config
-__start_mysql
+# __start_mysql
 #exec service mysqld
 exec mysqld_safe

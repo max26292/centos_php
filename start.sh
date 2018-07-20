@@ -10,7 +10,7 @@ echo "Running all server services"
 
 # }
 # # Call all functions
-sh -x /usr/local/bin/config_mysql.sh & /usr/local/bin/run-httpd.sh
+sh -x /usr/local/bin/run-httpd.sh &
 
 __run_supervisor
 
