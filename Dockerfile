@@ -13,6 +13,7 @@ RUN yum install httpd -y
 ##install mysql - php myadmin 
 RUN wget http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
 RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+RUN rpm -iUvh http://rpms.remirepo.net/enterprise/remi-release-6.rpm
 RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
 RUN yum -y update
 RUN yum install -y yum-utils
