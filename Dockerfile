@@ -1,4 +1,4 @@
-FROM centos:6
+FROM centos:centos6.9
 RUN yum clean all
 RUN yum -y update
 RUN yum install wget -y
