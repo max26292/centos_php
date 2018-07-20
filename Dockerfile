@@ -11,12 +11,12 @@ RUN yum install httpd -y
 #RUN systemctl enable mariadb.service
 RUN wget http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
 RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-RUN RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
+RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
 RUN yum -y update
 RUN yum -y install phpmyadmin
 RUN yum -y install nano
-RUN yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm -y
-RUN yum install http://rpms.remirepo.net/enterprise/remi-release-6.rpm -y
+RUN yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm 
+RUN yum install -y http://rpms.remirepo.net/enterprise/remi-release-6.rpm 
 RUN  yum install yum-utils -y
 RUN  yum-config-manager --enable remi-php71
 RUN yum install mysql-community-server -y
