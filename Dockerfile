@@ -62,5 +62,5 @@ RUN chmod 755 /usr/local/bin/run-httpd.sh
 ## testing 
 # ENTRYPOINT [ "/user/sbin" ]
 RUN ln -s usr/local/bin/start.sh / # backwards compat
-ENTRYPOINT ["start.sh"]
+#ENTRYPOINT ["start.sh"]
 #CMD ["mysqld_safe"]
