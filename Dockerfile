@@ -23,8 +23,8 @@ ENV YUM_REPO_URL="https://dev.mysql.com/get/mysql57-community-release-el6-7.noar
 # User/Group
 ENV MY_USER="mysql"
 ENV MY_GROUP="mysql"
-ENV MY_UID="48"
-ENV MY_GID="48"
+ENV MY_UID="747"
+ENV MY_GID="747"
 
 # Files
 ENV MYSQL_BASE_INCL="/etc/my.cnf.d"
