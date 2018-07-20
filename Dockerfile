@@ -1,6 +1,6 @@
 FROM centos:centos6.9
 #Install basic tools for install
-RUN yum clean all
+# RUN yum clean all
 RUN yum -y update
 RUN yum install wget -y
 RUN yum -y install nano
