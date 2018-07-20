@@ -19,9 +19,9 @@ RUN yum -y install phpmyadmin
 RUN yum -y install nano
 RUN yum install mysql-community-server -y
 ## install php 7.7
-RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+#RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
-RUN rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
+#RUN rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
 RUN yum install yum-utils
 RUN yum-config-manager --enable remi-php71
 #RUN yum install php-xxx
