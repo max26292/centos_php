@@ -15,6 +15,7 @@ RUN wget http://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm
 RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 RUN yum localinstall mysql57-community-release-el6-7.noarch.rpm -y
 RUN yum -y update
+RUN yum install -y yum-utils
 RUN yum -y install phpmyadmin
 RUN yum -y install nano
 RUN yum install mysql-community-server -y
@@ -22,7 +23,7 @@ RUN yum install mysql-community-server -y
 #RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
 #RUN rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
-RUN yum install yum-utils
+
 RUN yum-config-manager --enable remi-php71
 #RUN yum install php-xxx
 #RUN yum --enablerepo=remi-php71-test install php-xxx
