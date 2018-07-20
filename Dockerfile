@@ -141,7 +141,7 @@ RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
 RUN rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
 
 RUN yum-config-manager --enable remi-php71
-RUN yum install php71
+RUN yum install php71 -y
 #RUN yum install php-xxx
 #RUN yum --enablerepo=remi-php71-test install php-xxx
 RUN yum install -y php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo 
