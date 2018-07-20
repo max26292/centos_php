@@ -58,8 +58,6 @@ RUN yum -y update && yum -y install \
 	mysql-community-server
 
 RUN \
-	yum -y autoremove && \
-	yum clean metadata && \
 	yum clean all && \
 	yum -y install hostname && \
 	yum clean all
@@ -131,7 +129,7 @@ VOLUME /etc/mysql/docker-default.d
 ##########
 ### install phpmyadmin
 ##########
-RUN yum -y install phpmyadmin
+# RUN yum -y install phpmyadmin
 
 
 ## install php 7.1
@@ -159,6 +157,7 @@ EXPOSE 8080
 ##### end open port:wq
 
 WORKDIR /var/www/html
+
 ### test run service script
 
 ### mysql script
@@ -166,11 +165,14 @@ COPY start.sh /usr/local/bin/
 COPY config_mysql.sh /usr/local/bin/
 COPY run-httpd.sh /usr/local/bin/
 COPY supervisord.conf /etc/supervisord.conf
+
 ############### config files 
 COPY php.ini /etc/
+
 ##############################
 ######### change permission ##
 #############################
+
 RUN chmod 755 /usr/local/bin/start.sh
 RUN chmod -v +x /usr/local/bin/start.sh
 RUN chmod 755 /usr/local/bin/config_mysql.sh
@@ -182,6 +184,13 @@ RUN chmod 755 /usr/local/bin/run-httpd.sh
 # CMD ["mysqld_safe"]
 # CMD ["exec /usr/sbin/apachectl -D FOREGROUND"]
 # #CMD ["/bin/bash", "/start.sh"]
+
+##########################################################
+########## CLEAN NOT NEEDED PACKAGES
+
+package-cleanup --leaves --all
+
+###########################################################
 ## testing 
 # ENTRYPOINT [ "/user/sbin" ]
 RUN ln -s usr/local/bin/start.sh / # backwards compat
