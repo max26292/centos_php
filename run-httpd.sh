@@ -1,3 +1,4 @@
+ #!/bin/sh
 echo "start up httpd"
 #config hostname
 SERVER_NAME_FILE=/etc/httpd/conf.d/servername.conf
