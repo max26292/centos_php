@@ -4,11 +4,15 @@ RUN yum clean all
 RUN yum -y update
 RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
 RUN yum install wget -y
+RUN yum clean all
 RUN yum -y install nano
+RUN yum clean all
 RUN yum install -y yum-utils 
+RUN yum clean all
 ############ END ##################
 ########### INSTALL httpd #########
 RUN yum install httpd -y
+RUN yum clean all
 ##install mysql - php myadmin 
 
 ###
@@ -42,8 +46,6 @@ ENV MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log"
 ###
 ### Install
 ###
-RUN groupadd -g ${MY_GID} -r ${MY_GROUP} && \
-    adduser ${MY_USER} -u ${MY_UID} -M -s /sbin/nologin -g ${MY_GROUP}
 #########
 RUN \
     yum -y install epel-release && \
@@ -71,6 +73,7 @@ RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
 RUN rpm -Uvh remi-release-6.rpm 
 RUN yum-config-manager --enable remi-php71
 RUN yum install php71 -y
+RUN yum clean all
 RUN yum install -y php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo 
 RUN yum -y update 
 RUN \  
