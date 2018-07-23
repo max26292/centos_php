@@ -87,7 +87,6 @@ WORKDIR /var/www/html
 ### test run service script
 
 ### mysql script
-RUN rm -rf /var/lib/mysql/*
 COPY start.sh /usr/local/bin/
 COPY config_mysql.sh /usr/local/bin/
 COPY run-httpd.sh /usr/local/bin/
