@@ -90,6 +90,7 @@ WORKDIR /var/www/html
 COPY start.sh /usr/local/bin/
 COPY config_mysql.sh /usr/local/bin/
 COPY run-httpd.sh /usr/local/bin/
+COPY run-mysql.sh /usr/local/bin/
 COPY supervisord.conf /etc/supervisord.conf
 
 ############### config files 
@@ -101,13 +102,19 @@ COPY httpd.conf /etc/httpd/conf/
 
 RUN chmod 755 /usr/local/bin/start.sh
 RUN chmod -v +x /usr/local/bin/start.sh
-RUN chmod 755 /usr/local/bin/config_mysql.sh
+RUN chmod a+x /usr/local/bin/config_mysql.sh
 RUN chmod 755 /usr/local/bin/run-httpd.sh
-RUN chmod 755 /var/lib/mysql
+RUN chmod 755 /usr/local/bin/run-mysql.sh
+RUN chmod 777 /var/lib/mysql
+RUN chmod 777 /var/lib/mysql/
 ##########################################################
 ########## CLEAN NOT NEEDED PACKAGES #####################
-RUN package-cleanup --leaves --all
+# RUN package-cleanup --leaves --all
+RUN  yum clean all 
+RUN rm -rf /var/cache/yum
+RUN rm -rf /var/lib/mysql/*
 ###########################################################
 RUN ln -s usr/local/bin/start.sh / # backwards compat
-ENTRYPOINT ["start.sh"]
+# RUN /usr/local/bin/config_mysql.sh
+ENTRYPOINT ["/bin/bash","start.sh"]
 

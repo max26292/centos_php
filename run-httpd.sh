@@ -9,7 +9,7 @@ fi
 
 
 # clean up if container is being restarted
-rm -rf /var/run/httpd/*
+# exec rm -rf /var/run/httpd/*
 
 
 # run apache
