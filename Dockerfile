@@ -139,7 +139,7 @@ RUN \
     yum clean all 
 # yum -y install hostname && \
 # yum clean all
-
+# RUN yum install -y expect 
 #################### END of Prepair################################################
 
 EXPOSE 80
@@ -160,7 +160,7 @@ COPY supervisord.conf /etc/supervisord.conf
 
 ############### config files 
 COPY php.ini /etc/
-
+COPY httpd.conf /etc/httpd/conf/
 ##############################
 ######### change permission ##
 #############################
@@ -188,6 +188,6 @@ RUN package-cleanup --leaves --all
 # ENTRYPOINT [ "/user/sbin" ]
 RUN ln -s usr/local/bin/start.sh / # backwards compat
 
-# ENTRYPOINT ["start.sh"]
+ENTRYPOINT ["start.sh"]
 
 #CMD ["mysqld_safe"]

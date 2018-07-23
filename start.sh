@@ -1,6 +1,6 @@
  #!/bin/sh
 __run_supervisor() {
-echo "Running all server services"
+echo "###########  Running all server services  ##################"
 #
 # supervisor -n
 }
@@ -11,8 +11,8 @@ echo "Running all server services"
 
 # }
 # # Call all functions
-#sh -x /usr/local/bin/config_mysql.sh & /usr/local/bin/run-httpd.sh
-sh -x  /usr/local/bin/config_mysql.sh
+sh -x /usr/local/bin/config_mysql.sh & /usr/local/bin/run-httpd.sh
+# sh -x  /usr/local/bin/config_mysql.sh
 __run_supervisor
 # 
 
