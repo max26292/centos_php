@@ -14,6 +14,6 @@ rm -rf /var/run/httpd/*
 
 # run apache
 #exec  service httpd start
-exec apachectl -D FOREGROUND
+apachectl -D FOREGROUND
 #exec service httpd start
                              
