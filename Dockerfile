@@ -61,7 +61,7 @@ RUN yum clean all
 ##
 ## Configure
 ##
-VOLUME /var/lib/mysql
+# VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
 VOLUME /var/sock/mysqld
 VOLUME /etc/mysql/conf.d
@@ -120,4 +120,4 @@ RUN rm -rf /var/lib/mysql/*
 RUN ln -s usr/local/bin/start.sh / # backwards compat
 # RUN /usr/local/bin/config_mysql.sh
 ENTRYPOINT ["/bin/bash","start.sh"]
-
+VOLUME /var/lib/mysql
