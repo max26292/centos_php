@@ -81,70 +81,36 @@ RUN \
 RUN yum -y update && yum -y install \
     mysql-community-server
 
-RUN \
-    yum clean all && \
-    yum -y install hostname && \
-    yum clean all
+RUN yum clean all 
+
 
 
 ##
 ## Configure
 ##
-RUN \
-    rm -rf ${MYSQL_BASE_INCL} && \
-    rm -rf ${MYSQL_CUST_INCL1} && \
-    rm -rf ${MYSQL_CUST_INCL2} && \
-    rm -rf ${MYSQL_DEF_DAT} && \
-    rm -rf ${MYSQL_DEF_SCK} && \
-    rm -rf ${MYSQL_DEF_PID} && \
-    rm -rf ${MYSQL_DEF_LOG} && \
-    \
-    mkdir -p ${MYSQL_BASE_INCL} && \
-    mkdir -p ${MYSQL_CUST_INCL1} && \
-    mkdir -p ${MYSQL_CUST_INCL2} && \
-    mkdir -p ${MYSQL_DEF_DAT} && \
-    mkdir -p ${MYSQL_DEF_SCK} && \
-    mkdir -p ${MYSQL_DEF_PID} && \
-    mkdir -p ${MYSQL_DEF_LOG} && \
-    \
-    chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_BASE_INCL} && \
-    chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_CUST_INCL1} && \
-    chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_CUST_INCL2} && \
-    chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_DAT} && \
-    chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_SCK} && \
-    chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_PID} && \
-    chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_LOG} && \
-    \
-    chmod 0775 ${MYSQL_BASE_INCL} && \
-    chmod 0775 ${MYSQL_CUST_INCL1} && \
-    chmod 0775 ${MYSQL_CUST_INCL2} && \
-    chmod 0775 ${MYSQL_DEF_DAT} && \
-    chmod 0775 ${MYSQL_DEF_SCK} && \
-    chmod 0775 ${MYSQL_DEF_PID} && \
-    chmod 0775 ${MYSQL_DEF_LOG}
 
-RUN \
-    echo "[client]"                                         > /etc/my.cnf && \
-    echo "socket = ${MYSQL_DEF_SCK}/mysqld.sock"           >> /etc/my.cnf && \
-    \
-    echo "[mysql]"                                         >> /etc/my.cnf && \
-    echo "socket = ${MYSQL_DEF_SCK}/mysqld.sock"           >> /etc/my.cnf && \
-    \
-    echo "[mysqld]"                                        >> /etc/my.cnf && \
-    echo "skip-host-cache"                                 >> /etc/my.cnf && \
-    echo "skip-name-resolve"                               >> /etc/my.cnf && \
-    echo "datadir = ${MYSQL_DEF_DAT}"                      >> /etc/my.cnf && \
-    echo "user = ${MY_USER}"                               >> /etc/my.cnf && \
-    echo "port = 3306"                                     >> /etc/my.cnf && \
-    echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf && \
-    echo "socket = ${MYSQL_DEF_SCK}/mysqld.sock"           >> /etc/my.cnf && \
-    echo "pid-file = ${MYSQL_DEF_PID}/mysqld.pid"          >> /etc/my.cnf && \
-    echo "general_log_file = ${MYSQL_LOG_QUERY}"           >> /etc/my.cnf && \
-    echo "slow_query_log_file = ${MYSQL_LOG_SLOW}"         >> /etc/my.cnf && \
-    echo "log-error = ${MYSQL_LOG_ERROR}"                  >> /etc/my.cnf && \
-    echo "!includedir ${MYSQL_BASE_INCL}/"                 >> /etc/my.cnf && \
-    echo "!includedir ${MYSQL_CUST_INCL1}/"                >> /etc/my.cnf && \
-    echo "!includedir ${MYSQL_CUST_INCL2}/"                >> /etc/my.cnf
+# RUN \
+#     echo "[client]"                                         > /etc/my.cnf && \
+#     echo "socket = ${MYSQL_DEF_SCK}/mysqld.sock"           >> /etc/my.cnf && \
+#     \
+#     echo "[mysql]"                                         >> /etc/my.cnf && \
+#     echo "socket = ${MYSQL_DEF_SCK}/mysqld.sock"           >> /etc/my.cnf && \
+#     \
+#     echo "[mysqld]"                                        >> /etc/my.cnf && \
+#     echo "skip-host-cache"                                 >> /etc/my.cnf && \
+#     echo "skip-name-resolve"                               >> /etc/my.cnf && \
+#     echo "datadir = ${MYSQL_DEF_DAT}"                      >> /etc/my.cnf && \
+#     echo "user = ${MY_USER}"                               >> /etc/my.cnf && \
+#     echo "port = 3306"                                     >> /etc/my.cnf && \
+#     echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf && \
+#     echo "socket = ${MYSQL_DEF_SCK}/mysqld.sock"           >> /etc/my.cnf && \
+#     echo "pid-file = ${MYSQL_DEF_PID}/mysqld.pid"          >> /etc/my.cnf && \
+#     echo "general_log_file = ${MYSQL_LOG_QUERY}"           >> /etc/my.cnf && \
+#     echo "slow_query_log_file = ${MYSQL_LOG_SLOW}"         >> /etc/my.cnf && \
+#     echo "log-error = ${MYSQL_LOG_ERROR}"                  >> /etc/my.cnf && \
+#     echo "!includedir ${MYSQL_BASE_INCL}/"                 >> /etc/my.cnf && \
+#     echo "!includedir ${MYSQL_CUST_INCL1}/"                >> /etc/my.cnf && \
+#     echo "!includedir ${MYSQL_CUST_INCL2}/"                >> /etc/my.cnf
 VOLUME /var/lib/mysql
 VOLUME /var/log/mysql
 VOLUME /var/sock/mysqld
@@ -158,9 +124,9 @@ VOLUME /etc/mysql/docker-default.d
 
 ## install php 7.1
 
-RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+# RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm
-RUN rpm -Uvh remi-release-6.rpm epel-release-latest-6.noarch.rpm
+RUN rpm -Uvh remi-release-6.rpm 
 
 RUN yum-config-manager --enable remi-php71
 RUN yum install php71 -y
@@ -168,12 +134,11 @@ RUN yum install php71 -y
 #RUN yum --enablerepo=remi-php71-test install php-xxx
 RUN yum install -y php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo 
 RUN yum -y update 
-RUN \
-    yum -y autoremove && \
+RUN \  
     yum clean metadata && \
-    yum clean all && \
-    yum -y install hostname && \
-    yum clean all
+    yum clean all 
+# yum -y install hostname && \
+# yum clean all
 
 #################### END of Prepair################################################
 
@@ -187,6 +152,7 @@ WORKDIR /var/www/html
 ### test run service script
 
 ### mysql script
+RUN rm -rf /var/lib/mysql/*
 COPY start.sh /usr/local/bin/
 COPY config_mysql.sh /usr/local/bin/
 COPY run-httpd.sh /usr/local/bin/

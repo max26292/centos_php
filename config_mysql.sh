@@ -167,153 +167,153 @@ log "info" "Docker date set to: $(date)"
 
 
 
-###
-### Add custom Configuration
-###
+# ###
+# ### Add custom Configuration
+# ###
 
-# MYSQL_GENERAL_LOG
-set_mysql_custom_settings "mysqld" "general-log" "MYSQL_GENERAL_LOG" "" "${MYSQL_BASE_INCL}/logging.cnf"
+# # MYSQL_GENERAL_LOG
+# set_mysql_custom_settings "mysqld" "general-log" "MYSQL_GENERAL_LOG" "" "${MYSQL_BASE_INCL}/logging.cnf"
 
-# MYSQL_SOCKET_DIR
-set_mysql_custom_settings "client" "socket" "MYSQL_SOCKET_DIR" "/mysqld.sock" "${MYSQL_BASE_INCL}/socket.cnf"
-set_mysql_custom_settings "mysql"  "socket" "MYSQL_SOCKET_DIR" "/mysqld.sock" "${MYSQL_BASE_INCL}/socket.cnf"
-set_mysql_custom_settings "mysqld" "socket" "MYSQL_SOCKET_DIR" "/mysqld.sock" "${MYSQL_BASE_INCL}/socket.cnf"
+# # MYSQL_SOCKET_DIR
+# set_mysql_custom_settings "client" "socket" "MYSQL_SOCKET_DIR" "/mysqld.sock" "${MYSQL_BASE_INCL}/socket.cnf"
+# set_mysql_custom_settings "mysql"  "socket" "MYSQL_SOCKET_DIR" "/mysqld.sock" "${MYSQL_BASE_INCL}/socket.cnf"
+# set_mysql_custom_settings "mysqld" "socket" "MYSQL_SOCKET_DIR" "/mysqld.sock" "${MYSQL_BASE_INCL}/socket.cnf"
 
-# Take care about custom socket directories
-if set | grep "^MYSQL_SOCKET_DIR=" >/dev/null 2>&1; then
+# # Take care about custom socket directories
+# if set | grep "^MYSQL_SOCKET_DIR=" >/dev/null 2>&1; then
 
-	# Create socket directory
-	if [ ! -d "${MYSQL_SOCKET_DIR}" ]; then
-		run "mkdir -p ${MYSQL_SOCKET_DIR}"
+# 	# Create socket directory
+# 	if [ ! -d "${MYSQL_SOCKET_DIR}" ]; then
+# 		run "mkdir -p ${MYSQL_SOCKET_DIR}"
 
-	# Delete existing socket file
-	elif [ -f "${MYSQL_SOCKET_DIR}/mysqld.sock" ]; then
-		run "rm -f ${MYSQL_SOCKET_DIR}/mysqld.sock"
-	fi
+# 	# Delete existing socket file
+# 	elif [ -f "${MYSQL_SOCKET_DIR}/mysqld.sock" ]; then
+# 		run "rm -f ${MYSQL_SOCKET_DIR}/mysqld.sock"
+# 	fi
 
-	# Set socket permission
-	run "chown ${MY_USER}:${MY_GROUP} ${MYSQL_SOCKET_DIR}"
-	run "chmod 0777 ${MYSQL_SOCKET_DIR}"
-fi
-
-
+# 	# Set socket permission
+# 	run "chown ${MY_USER}:${MY_GROUP} ${MYSQL_SOCKET_DIR}"
+# 	run "chmod 0777 ${MYSQL_SOCKET_DIR}"
+# fi
 
 
-################################################################################
-# INSTALLATION
-################################################################################
-
-DB_DATA_DIR="$( get_mysql_default_config "datadir" )"
 
 
-##
-## INSTALLATION
-##
+# ################################################################################
+# # INSTALLATION
+# ################################################################################
 
-# Fixing permissions
-if [ ! -f "${MYSQL_LOG_QUERY}" ]; then
-	run "touch ${MYSQL_LOG_QUERY}"
-fi
-if [ ! -f "${MYSQL_LOG_SLOW}" ]; then
-	run "touch ${MYSQL_LOG_SLOW}"
-fi
-if [ ! -f "${MYSQL_LOG_ERROR}" ]; then
-	run "touch ${MYSQL_LOG_ERROR}"
-fi
-
-run "chown -R ${MY_USER}:${MY_GROUP} ${DB_DATA_DIR}"
-run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_DAT}"
-run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_LOG}"
-run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_PID}"
-run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_SCK}"
-
-run "chmod 0775 ${DB_DATA_DIR}"
-run "chmod 0775 ${MYSQL_DEF_DAT}"
-run "chmod 0775 ${MYSQL_DEF_LOG}"
-run "chmod 0775 ${MYSQL_DEF_PID}"
-run "chmod 0775 ${MYSQL_DEF_SCK}"
-
-run "find ${MYSQL_DEF_LOG}/ -type f -exec chmod 0664 {} \;"
-
-# Directory already exists and has content (other thab '.' and '..')
-if [ -d "${DB_DATA_DIR}/mysql" ] && [ "$( ls -A "${DB_DATA_DIR}/mysql" )" ]; then
-	log "info" "Found existing data directory. MySQL already setup."
-
-else
-
-	log "info" "No existing MySQL data directory found. Setting up MySQL for the first time."
-
-	# Create datadir if not exist yet
-	if [ ! -d "${DB_DATA_DIR}" ]; then
-		log "info" "Creating empty data directory in: ${DB_DATA_DIR}."
-		run "mkdir -p ${DB_DATA_DIR}"
-		run "chown -R ${MY_USER}:${MY_GROUP} ${DB_DATA_DIR}"
-		run "chmod 0777 ${MY_USER}:${MY_GROUP} ${DB_DATA_DIR}"
-	fi
+# DB_DATA_DIR="$( get_mysql_default_config "datadir" )"
 
 
-	# Install Database
-	run "mysqld --initialize-insecure --datadir=${DB_DATA_DIR} --user=${MY_USER}"
+# ##
+# ## INSTALLATION
+# ##
+
+# # Fixing permissions
+# if [ ! -f "${MYSQL_LOG_QUERY}" ]; then
+# 	run "touch ${MYSQL_LOG_QUERY}"
+# fi
+# if [ ! -f "${MYSQL_LOG_SLOW}" ]; then
+# 	run "touch ${MYSQL_LOG_SLOW}"
+# fi
+# if [ ! -f "${MYSQL_LOG_ERROR}" ]; then
+# 	run "touch ${MYSQL_LOG_ERROR}"
+# fi
+
+# run "chown -R ${MY_USER}:${MY_GROUP} ${DB_DATA_DIR}"
+# run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_DAT}"
+# run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_LOG}"
+# run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_PID}"
+# run "chown -R ${MY_USER}:${MY_GROUP} ${MYSQL_DEF_SCK}"
+
+# run "chmod 0775 ${DB_DATA_DIR}"
+# run "chmod 0775 ${MYSQL_DEF_DAT}"
+# run "chmod 0775 ${MYSQL_DEF_LOG}"
+# run "chmod 0775 ${MYSQL_DEF_PID}"
+# run "chmod 0775 ${MYSQL_DEF_SCK}"
+
+# run "find ${MYSQL_DEF_LOG}/ -type f -exec chmod 0664 {} \;"
+
+# # Directory already exists and has content (other thab '.' and '..')
+# if [ -d "${DB_DATA_DIR}/mysql" ] && [ "$( ls -A "${DB_DATA_DIR}/mysql" )" ]; then
+# 	log "info" "Found existing data directory. MySQL already setup."
+
+# else
+
+# 	log "info" "No existing MySQL data directory found. Setting up MySQL for the first time."
+
+# 	# Create datadir if not exist yet
+# 	if [ ! -d "${DB_DATA_DIR}" ]; then
+# 		log "info" "Creating empty data directory in: ${DB_DATA_DIR}."
+# 		run "mkdir -p ${DB_DATA_DIR}"
+# 		run "chown -R ${MY_USER}:${MY_GROUP} ${DB_DATA_DIR}"
+# 		run "chmod 0777 ${MY_USER}:${MY_GROUP} ${DB_DATA_DIR}"
+# 	fi
 
 
-	# Start server
-	run "mysqld --skip-networking &"
+# 	# Install Database
+# 	run "mysqld --initialize-insecure --datadir=${DB_DATA_DIR} --user=${MY_USER}"
 
 
-	# Wait at max 60 seconds for it to start up
-	i=0
-	max=60
-	while [ $i -lt $max ]; do
-		if echo 'SELECT 1' |  mysql --protocol=socket -uroot  > /dev/null 2>&1; then
-			break
-		fi
-		log "info" "Initializing ..."
-		sleep 1s
-		i=$(( i + 1 ))
-	done
+# 	# Start server
+# 	run "mysqld --skip-networking &"
 
 
-	# Get current pid
-	pid="$(pgrep mysqld | head -1)"
-	if [ "${pid}" = "" ]; then
-		log "err" "Could not find running MySQL PID."
-		log "err" "MySQL init process failed."
-		exit 1
-	fi
+# 	# Wait at max 60 seconds for it to start up
+# 	i=0
+# 	max=60
+# 	while [ $i -lt $max ]; do
+# 		if echo 'SELECT 1' |  mysql --protocol=socket -uroot  > /dev/null 2>&1; then
+# 			break
+# 		fi
+# 		log "info" "Initializing ..."
+# 		sleep 1s
+# 		i=$(( i + 1 ))
+# 	done
 
 
-	# Bootstrap MySQL
-	log "info" "Setting up root user permissions."
-	echo "DELETE FROM mysql.user ;" | mysql --protocol=socket -uroot
-	echo "CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" | mysql --protocol=socket -uroot
-	echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;" | mysql --protocol=socket -uroot
-	echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot
-	echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot
+# 	# Get current pid
+# 	pid="$(pgrep mysqld | head -1)"
+# 	if [ "${pid}" = "" ]; then
+# 		log "err" "Could not find running MySQL PID."
+# 		log "err" "MySQL init process failed."
+# 		exit 1
+# 	fi
 
 
-	# Shutdown MySQL
-	log "info" "Shutting down MySQL."
-	run "kill -s TERM ${pid}"
-	i=0
-	max=60
-	while [ $i -lt $max ]; do
-		if ! pgrep mysqld >/dev/null 2>&1; then
-			break
-		fi
-		sleep 1s
-		i=$(( i + 1 ))
-	done
+# 	# Bootstrap MySQL
+# 	log "info" "Setting up root user permissions."
+# 	echo "DELETE FROM mysql.user ;" | mysql --protocol=socket -uroot
+# 	echo "CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;" | mysql --protocol=socket -uroot
+# 	echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;" | mysql --protocol=socket -uroot
+# 	echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot
+# 	echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot
 
 
-	# Check if it is still running
-	if pgrep mysqld >/dev/null 2>&1; then
-		log "err" "Unable to shutdown MySQL server."
-		log "err" "MySQL init process failed."
-		exit 1
-	fi
-	log "info" "MySQL successfully installed."
+# 	# Shutdown MySQL
+# 	log "info" "Shutting down MySQL."
+# 	run "kill -s TERM ${pid}"
+# 	i=0
+# 	max=60
+# 	while [ $i -lt $max ]; do
+# 		if ! pgrep mysqld >/dev/null 2>&1; then
+# 			break
+# 		fi
+# 		sleep 1s
+# 		i=$(( i + 1 ))
+# 	done
 
-fi
+
+# 	# Check if it is still running
+# 	if pgrep mysqld >/dev/null 2>&1; then
+# 		log "err" "Unable to shutdown MySQL server."
+# 		log "err" "MySQL init process failed."
+# 		exit 1
+# 	fi
+# 	log "info" "MySQL successfully installed."
+
+# fi
 
 
 
