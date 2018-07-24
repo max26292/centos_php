@@ -49,8 +49,7 @@ RUN \
     yum -y install mysql-community-server && \
     yum clean all
 ## install php 7.1
-RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm && \
-    rpm -Uvh remi-release-6.rpm && \
+RUN rpm -IUvh http://rpms.remirepo.net/enterprise/remi-release-6.rpm  && \
     yum-config-manager --enable remi-php71 && \
     yum install php71 -y && \
     yum install -y php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo  && \
