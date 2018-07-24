@@ -5,6 +5,10 @@ echo "###########  Running all server services  ##################"
 # supervisor -n
 }
 echo "call script"
+chmod a+x /usr/local/bin/config_mysql.sh
+chmod 755 /usr/local/bin/run-httpd.sh
+chmod 755 /usr/local/bin/run-mysql.sh
+chmod 777 /var/lib/mysql/
 # # Call all functions
 bash -x /usr/local/bin/run-mysql.sh & /usr/local/bin/run-httpd.sh
 # bash -x  /usr/local/bin/config_mysql.sh
