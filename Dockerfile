@@ -57,9 +57,7 @@ VOLUME /var/log/mysql
 VOLUME /var/sock/mysqld
 VOLUME /etc/mysql/conf.d
 VOLUME /etc/mysql/docker-default.d
-EXPOSE 80
-EXPOSE 3306
-EXPOSE 8080
+EXPOSE 80 3306 9000 8080
 ##### end open port
 WORKDIR /var/www/html
 ### mysql script
@@ -79,6 +77,6 @@ RUN chmod -v +x /usr/local/bin/start.sh
 ###########################################################
 RUN ln -s usr/local/bin/start.sh / # backwards compat
 # RUN /usr/local/bin/config_mysql.sh
-VOLUME /var/lib/mysql:rw
+VOLUME ${MYSQL_DEF_DAT}:rw
 ENTRYPOINT ["/bin/bash","start.sh"]
 
