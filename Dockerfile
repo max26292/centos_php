@@ -14,31 +14,16 @@ ENV MYSQL_LOG_ERROR="${MYSQL_DEF_LOG}/error.log"
 ENV MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log"
 # Install basic tools for install
 ########## INSTALL httpd #########
-RUN yum -y update && yum clean all
-RUN gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4
-RUN yum install wget -y && \
+RUN yum -y update && yum clean all && \
+    gpg --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 && \
+    yum install wget -y && \
     yum -y install nano && \
     yum install -y yum-utils  && \
     yum install httpd -y && \ 
-    yum clean all  
+    yum clean all   && \
 ############ END ##################
-
-
-
-###
-### Envs
-###
-
-# Version
 # Check for Updates:
 # https://dev.mysql.com/downloads/repo/yum/
-
-
-###
-### Install
-###
-#########
-RUN \
     yum -y install epel-release && \
     rpm -ivh ${YUM_REPO_URL} && \
     yum-config-manager --disable mysql55-community && \
@@ -47,18 +32,18 @@ RUN \
     yum-config-manager --disable mysql80-community && \
     yum -y update && \    
     yum -y install mysql-community-server && \
-    yum clean all
+    yum clean all &&\
 ## install php 7.1
-RUN rpm -iUvh http://rpms.remirepo.net/enterprise/remi-release-6.rpm  && \
+    rpm -iUvh http://rpms.remirepo.net/enterprise/remi-release-6.rpm  && \
     yum-config-manager --enable remi-php71 && \
     yum install php71 -y && \
     yum install -y php php-mcrypt php-cli php-gd php-curl php-mysql php-ldap php-zip php-fileinfo  && \
     yum -y update && \
     yum clean metadata && \
-    yum clean all 
+    yum clean all && \
 ##########################################################
 ########## CLEAN NOT NEEDED PACKAGES #####################
-RUN package-cleanup --leaves --all && \
+    package-cleanup --leaves --all && \
     yum clean all && \
     rm -rf /var/cache/yum
 # RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
