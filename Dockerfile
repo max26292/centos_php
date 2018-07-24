@@ -46,7 +46,7 @@ RUN \
     yum-config-manager --enable mysql57-community && \
     yum-config-manager --disable mysql80-community && \
     yum -y update && \    
-    yum -y install ysql-community-server && \
+    yum -y install mysql-community-server && \
     yum clean all
 ## install php 7.1
 RUN wget http://rpms.remirepo.net/enterprise/remi-release-6.rpm && \
