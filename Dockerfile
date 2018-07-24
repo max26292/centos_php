@@ -119,5 +119,6 @@ RUN rm -rf /var/lib/mysql/*
 ###########################################################
 RUN ln -s usr/local/bin/start.sh / # backwards compat
 # RUN /usr/local/bin/config_mysql.sh
+VOLUME /var/lib/mysql:rw
 ENTRYPOINT ["/bin/bash","start.sh"]
-VOLUME /var/lib/mysql
+
