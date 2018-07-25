@@ -1,8 +1,7 @@
 #!/bin/bash
 
 ### stop mysqld service if it running
-chmod a+x /usr/local/bin/config_mysql.sh
-chmod 777 /var/lib/mysql/
+
 echo "############### Stop mysqld service ################"
 service mysqld stop
 killall mysqld
