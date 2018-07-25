@@ -34,5 +34,5 @@ echo "[mysqld]"                                        >> /etc/my.cnf
 echo "port = 3306"                                     >> /etc/my.cnf
 echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf
 service mysqld restart
-# exec mysqld_safe
+service mysqld stop
 # service mysqld start	
