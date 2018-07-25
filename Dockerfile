@@ -2,16 +2,16 @@ FROM centos:centos6.9
 
 ######################################
 ########## Env define ################
-ENV YUM_REPO_URL="https://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm"
+ENV YUM_REPO_URL="https://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm" \
 # Files
-ENV MYSQL_BASE_INCL="/etc/my.cnf.d"
-ENV MYSQL_CUST_INCL1="/etc/mysql/conf.d"
-ENV MYSQL_CUST_INCL2="/etc/mysql/docker-default.d"
-ENV MYSQL_DEF_DAT="/var/lib/mysql"
-ENV MYSQL_DEF_LOG="/var/log/mysql"
-ENV MYSQL_LOG_SLOW="${MYSQL_DEF_LOG}/slow.log"
-ENV MYSQL_LOG_ERROR="${MYSQL_DEF_LOG}/error.log"
-ENV MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log"
+    MYSQL_BASE_INCL="/etc/my.cnf.d" \
+    MYSQL_CUST_INCL1="/etc/mysql/conf.d" \
+    MYSQL_CUST_INCL2="/etc/mysql/docker-default.d" \
+    MYSQL_DEF_DAT="/var/lib/mysql" \
+    MYSQL_DEF_LOG="/var/log/mysql" \
+    MYSQL_LOG_SLOW="${MYSQL_DEF_LOG}/slow.log" \
+    MYSQL_LOG_ERROR="${MYSQL_DEF_LOG}/error.log" \
+    MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log" 
 # Install basic tools for install
 ########## INSTALL httpd #########
 RUN yum -y update && yum clean all && \
