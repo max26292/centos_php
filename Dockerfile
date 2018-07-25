@@ -77,5 +77,6 @@ RUN chmod -v +x /usr/local/bin/start.sh
 ###########################################################
 RUN ln -s usr/local/bin/start.sh / # backwards compat
 # RUN /usr/local/bin/config_mysql.sh
+CMD ["/bin/bash", '/usr/local/bin/config_mysql.sh']
 ENTRYPOINT ["/bin/bash","start.sh"]
 # ONBUILD VOLUME ${MYSQL_DEF_DAT}:rw
