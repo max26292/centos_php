@@ -21,7 +21,6 @@ ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
 mysqladmin -u root -p$(echo ${__pass}) password $pass
 # echo $(echo ${pass})
 ##testing 
-
 mysqladmin -u root -p$pass flush-privileges
 echo "CREATE USER 'root'@'%' IDENTIFIED BY '$pass' ;" | mysql --protocol=socket -uroot -p$pass
 echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;" | mysql --protocol=socket -uroot -p$pass
@@ -30,7 +29,6 @@ echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p$pass
 killall mysqld
 service mysqld stop
 echo "testing script"
-
 echo "[mysqld]"                                        >> /etc/my.cnf
 echo "port = 3306"                                     >> /etc/my.cnf
 echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf
