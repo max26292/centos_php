@@ -83,6 +83,8 @@ RUN chmod 755 /usr/local/bin/start.sh && \
 ############# install composer for laravel ################
     curl -sS https://getcomposer.org/installer | php && \ 
     mv composer.phar /usr/local/bin/composer    
-# RUN /usr/local/bin/config_mysql.sh
+# ADDION EXTENSION #####################################
+########## 
+
 ENTRYPOINT ["/bin/bash","start.sh"]
 # ONBUILD VOLUME ${MYSQL_DEF_DAT}:rw

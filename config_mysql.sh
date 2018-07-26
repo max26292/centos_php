@@ -11,6 +11,7 @@ service mysqld start
 __string=$(grep 'temporary password' /var/log/mysqld.log)
 __pass=${__string:(-12)}
 # echo ${__pass}
+########### ROOT PASSWORD #########################
 pass='#Hitman5066789'
 echo "############## Update root password ############"
 ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
