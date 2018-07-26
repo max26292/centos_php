@@ -1,3 +1,4 @@
 #!/bin/bash
 # /usr/local/bin/config_mysql.sh
-mysqld_safe
+chown -R mysql:mysql /var/lib/mysql /var/run/mysqld && \
+    service mysqld start
