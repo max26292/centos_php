@@ -22,12 +22,6 @@ mysqladmin -u root -p$pass flush-privileges
 echo "CREATE USER 'root'@'%' IDENTIFIED BY '$pass' ;" | mysql --protocol=socket -uroot -p$pass
 echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;" | mysql --protocol=socket -uroot -p$pass
 echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot -p$pass
-#remove password policy
-echo "validate_password_length 3 ;" | mysql --protocol=socket -uroot -p$pass
-echo "validate_password_mixed_case_count 0 ;" | mysql --protocol=socket -uroot -p$pass
-echo "validate_password_mixed_case_count 0 ;" | mysql --protocol=socket -uroot -p$pass
-echo "validate_password_policy 0 ;" | mysql --protocol=socket -uroot -p$pass
-echo "validate_password_special_char_count 0 ;" | mysql --protocol=socket -uroot -p$pass  
 echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p$pass  
 killall mysqld
 service mysqld stop

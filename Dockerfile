@@ -77,9 +77,12 @@ RUN chmod 755 /usr/local/bin/start.sh && \
     chmod a+x /usr/local/bin/config_mysql.sh && \
     chmod 755 /var/lib/mysql && \
     chmod 755 /var/lib/mysql/ && \
-    /usr/local/bin/config_mysql.sh  
+    /usr/local/bin/config_mysql.sh && \  
 ###########################################################
-RUN ln -s usr/local/bin/start.sh / # backwards compat
+    ln -s usr/local/bin/start.sh / # backwards compat && \
+############# install composer for laravel ################
+    curl -sS https://getcomposer.org/installer | php && \ 
+    mv composer.phar /usr/local/bin/composer    
 # RUN /usr/local/bin/config_mysql.sh
 ENTRYPOINT ["/bin/bash","start.sh"]
 # ONBUILD VOLUME ${MYSQL_DEF_DAT}:rw
