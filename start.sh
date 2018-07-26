@@ -7,7 +7,6 @@ echo "###########  Running all server services  ##################"
 echo "################## CHANGE SH FILE PERMISSION ##################"
 chmod 755 /usr/local/bin/run-httpd.sh
 chmod 755 /usr/local/bin/run-mysql.sh
-
 # # Call all functions
 echo "################## EXECUTE SH SCRIPT ##################"
 bash -x /usr/local/bin/run-mysql.sh & /usr/local/bin/run-httpd.sh
