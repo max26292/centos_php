@@ -2,6 +2,7 @@ version: '3.2'
 services:
 #php host
   host:
+    # build:
     image: max26292/centos_php:latest
     container_name: host       
     ports:
@@ -15,13 +16,9 @@ services:
       MYSQL_PASSWORD: pass
       MYSQL_DATABASE: test_db
     volumes:    
-      - ./:/var/www/html/         
-      # - ./mysql:/var/lib/mysql/
+      - ./:/var/www/html/
     networks: 
-      - local-net
-    # command:
-    #   # - /usr/local/bin/config_mysql.sh
-#phpmyadmin  
+      - local-net     
 networks:
   local-net:    
     driver: bridge
