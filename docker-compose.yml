@@ -1,0 +1,29 @@
+version: '3.2'
+services:
+#php host
+  host:
+    image: max26292/centos_php:latest
+    container_name: host       
+    ports:
+      - "81:80"
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: '#Hitman5066789'
+      ############### database for test
+      # -change next 3 lines below for whatever you want and use this for test
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+      MYSQL_DATABASE: test_db
+    volumes:    
+      - ./:/var/www/html/         
+      # - ./mysql:/var/lib/mysql/
+    networks: 
+      - local-net
+    # command:
+    #   # - /usr/local/bin/config_mysql.sh
+#phpmyadmin  
+networks:
+  local-net:    
+    driver: bridge
+volumes:
+  mysql:

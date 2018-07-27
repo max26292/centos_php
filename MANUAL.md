@@ -4,11 +4,11 @@
     * config_mysql.sh for root password
     * php.ini for php configuration
     * httpd.conf for setup apache config
-> You must change the value in these files before build your own image.
+> You must change these value (if necessary) in these files before build your own image.
 * Now, go to the docker file
     * Our image bases from the Centos os so use *yum* to install packages.
     * In this file, you should not change anything before the extention line because that may make your build process fail.
-    * If you need to install some extension, do it below the <br> ############# line and before the ENTRYPOINT
+    * If you need to install some extension, do it below the  ########### line and before the ENTRYPOINT
         * For example
          ```shell script
             ######### 
@@ -18,6 +18,12 @@
         ```
         * You should use && \ if have many commands because using many RUN command makes docker create more layer to build your image so that is cause of large size image
 * Well done, now you can build your own container with command **docker build -t [your image tag] .**
-* *Take a cup of coffe while waiting this process complete.*
+* *Take a cup of coffe while waiting this process complete.* 
+  
+ ================================================================================
+
+ ## The next thing is docker compose
+ ### docker compose file (*docker-compose.yml*)
+ 
          
  
