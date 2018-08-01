@@ -14,7 +14,7 @@ __pass=${__string:(-12)}
 ########### ROOT PASSWORD #########################
 pass='#Hitman5066789'
 echo "############## Update root password ############"
-ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock
+# cp /var/lib/mysql/mysql.sock /usr/local/bin/
 # echo "$SECURE_MYSQL"
 mysqladmin -u root -p$(echo ${__pass}) password $pass
 # echo $(echo ${pass})
@@ -26,10 +26,13 @@ echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot -p$pass
 echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p$pass  
 killall mysqld
 service mysqld stop
-echo "testing script"
+
+echo "##Config mysql##"
+sed -i 's/socket=\/var\/lib\/mysql\/mysql.sock/\#socket=\/var\/lib\/mysql\/mysql.sock/g' /etc/my.cnf
 echo "[mysqld]"                                        >> /etc/my.cnf
 echo "port = 3306"                                     >> /etc/my.cnf
 echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf
+echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
 service mysqld restart
 service mysqld stop
 # service mysqld start	
