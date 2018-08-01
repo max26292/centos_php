@@ -25,8 +25,8 @@
          ```
 * Well done, now you can build your own container with command 
      ```docker build -t [your image tag] .```
-* *Take a cup of coffe while waiting this process complete.* 
-  
+* *Take a cup of coffe while waiting this process complete.*     
+
  ================================================================================
 
  ## The next thing is docker compose
@@ -125,6 +125,56 @@
 * **NOTICE:**
     * *a small diffent thing with xampp or wamp is your database host is 0.0.0.0 instead of localhost or 127.0.0.1*
 # *That all =]]~ wellcome to shit world*
+
+================================================================================
+# Advandtage guide
+*Not complete so dont follow that*
+## **The second way to install more extension without touch your base docker file**
+* Let take a short look to the yml file below, you should find the #build command that is your way to install extension
+
+    ```
+    version: '3.2'
+    services:
+        #php host
+        host:
+            # build:
+            image: centos_php:latest
+            container_name: host       
+            ports:
+            - "81:80"
+            - "3306:3306"
+            environment:
+            - MYSQL_ROOT_PASSWORD: '#Hitman5066789'
+            ############### database for test
+            # - change next 3 lines below for whatever you want and use this for test
+            - MYSQL_USER: user
+            - MYSQL_PASSWORD: pass
+            - MYSQL_DATABASE: test_db
+            volumes:    
+            - ./:/var/www/html/
+            networks: 
+            - local-net     
+    networks:
+    local-net:    
+        driver: bridge 
+    volumes:
+        - mysql:
+    ```
+  
+* Now let change the #build command like:
+    ```
+    build:
+        context: .
+        dockerfile: Dockerfile-alternate
+    ```
+    * context: your file path, I use the project root path so my path is " . ", *you can change that to your related path: /[docker-addition-file-directory]/*
+    *dockerfile: your docker file name
+    * I use my project root path to stored my second dockerfile so I create a new dockerfile name "Dockerfile-alternate" and put some content to it
+    ```
+    FROM max26292/centos_php:latest
+    RUN install nano
+    ```
+    * In this case, I use my previous built image to install nano editor 
 
             
  
