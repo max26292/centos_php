@@ -32,6 +32,8 @@ echo "[mysqld]"                                        >> /etc/my.cnf
 echo "port = 3306"                                     >> /etc/my.cnf
 echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf
 echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
+echo "[client]"                                        >> /etc/my.cnf
+echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
 service mysqld restart
 service mysqld stop
 # service mysqld start	
