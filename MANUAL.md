@@ -55,7 +55,9 @@
             - local-net     
     networks:
     local-net:    
-        driver: bridge    
+        driver: bridge 
+    volumes:
+        - mysql:
     ```
 *  Now, let take a short view on this file, you should pay your attention on these values on the list below:
     1. **build**: That is a location where you execute your new docker file *(advance feature)*
@@ -76,7 +78,7 @@
             The command stucture: 
             * **image: [REPOSITORY]:[TAG]**
 
-            **=>>** So you image line is
+            **=>>** So your image line is
             * **image: centos_php:latest**
     1. *container_name: host (addition attibute) that use to create your container name* so just take a shot look to it 
     1.  ports: 
@@ -109,15 +111,19 @@
             ```
                 volumes:    
                 - ./:/var/www/html/
+                - ./mysql:/var/lib/mysql
             ```
             * In this line, I currently mouting root directory of my website to working dir on server
             
             *=> So if you wanna test some thing different like how to remove my shit function on server just change it like **- ./function/:/var/www/html/**  Done*
+            * **Another thing is the mounted folder of your mysql database directory on server so please dont touch that**
 ### Well, your configtion step is done so open your terminal and run command:
 
 * **docker-compose up**  to run it on attach mode ("*It use to debug some error when your builder make something wrong*")
 * **docker-compose up -d** to run it on detach mode ("*using when everything is working fine*")
 * **docker-compose build** to buildy your dockerfile on first step
+* **NOTICE:**
+    * *a small diffent thing with xampp or wamp is your database host is 0.0.0.0 instead of localhost or 127.0.0.1*
 # *That all =]]~ wellcome to shit world*
 
             
