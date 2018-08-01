@@ -8,10 +8,7 @@ ENV YUM_REPO_URL="https://dev.mysql.com/get/mysql57-community-release-el6-7.noar
     MYSQL_CUST_INCL1="/etc/mysql/conf.d" \
     MYSQL_CUST_INCL2="/etc/mysql/docker-default.d" \
     MYSQL_DEF_DAT="/var/lib/mysql" \
-    MYSQL_DEF_LOG="/var/log/mysql" \
-    MYSQL_LOG_SLOW="${MYSQL_DEF_LOG}/slow.log" \
-    MYSQL_LOG_ERROR="${MYSQL_DEF_LOG}/error.log" \
-    MYSQL_LOG_QUERY="${MYSQL_DEF_LOG}/query.log" 
+    MYSQL_DEF_LOG="/var/log/mysql"   
 # Install basic tools for install
 ########## INSTALL httpd #########
 RUN yum -y update && yum clean all && \
@@ -47,16 +44,11 @@ RUN yum -y update && yum clean all && \
     yum clean all && \
     rm -rf /var/cache/yum
 # RUN wget https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-
 #################### END of Prepair################################################
 ##
 ## Configure
 ##
-# VOLUME /var/lib/mysql
-VOLUME /var/log/mysql
-VOLUME /var/sock/mysqld
-VOLUME /etc/mysql/conf.d
-VOLUME /etc/mysql/docker-default.d
+VOLUME /var/lib/mysql
 EXPOSE 80 3306 9000 8080
 ##### end open port
 WORKDIR /var/www/html
@@ -77,7 +69,7 @@ RUN chmod 755 /usr/local/bin/start.sh && \
     chmod a+x /usr/local/bin/config_mysql.sh && \
     chmod 755 /var/lib/mysql && \
     chmod 755 /var/lib/mysql/ && \
-    chmod 755 /usr/local/bin && \
+    chmod 777 /usr/local/bin && \
     /usr/local/bin/config_mysql.sh && \  
 ###########################################################
     ln -s usr/local/bin/start.sh / # backwards compat && \
@@ -86,7 +78,5 @@ RUN chmod 755 /usr/local/bin/start.sh && \
     mv composer.phar /usr/local/bin/composer    
 # ADDITIONAL EXTENSION #####################################
 ########## 
-
 #### END ADDITONAL EXTENSION
 ENTRYPOINT ["/bin/bash","start.sh"]
-# ONBUILD VOLUME ${MYSQL_DEF_DAT}:rw
