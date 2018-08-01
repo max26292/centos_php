@@ -126,7 +126,7 @@
     * *a small diffent thing with xampp or wamp is your database host is 0.0.0.0 instead of localhost or 127.0.0.1*
 # *That all =]]~ wellcome to shit world*
 
-# ==================================================================================
+ ==================================================================================
 # Advandtage guide
 *Not complete so dont follow that*
 ## **The second way to install more extension without touch your base docker file**
