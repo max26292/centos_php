@@ -77,6 +77,7 @@ RUN chmod 755 /usr/local/bin/start.sh && \
     chmod a+x /usr/local/bin/config_mysql.sh && \
     chmod 755 /var/lib/mysql && \
     chmod 755 /var/lib/mysql/ && \
+    chmod 755 /usr/local/bin && \
     /usr/local/bin/config_mysql.sh && \  
 ###########################################################
     ln -s usr/local/bin/start.sh / # backwards compat && \

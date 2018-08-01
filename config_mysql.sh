@@ -26,7 +26,6 @@ echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot -p$pass
 echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p$pass  
 killall mysqld
 service mysqld stop
-
 echo "##Config mysql##"
 sed -i 's/socket=\/var\/lib\/mysql\/mysql.sock/\#socket=\/var\/lib\/mysql\/mysql.sock/g' /etc/my.cnf
 echo "[mysqld]"                                        >> /etc/my.cnf
