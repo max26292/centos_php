@@ -29,10 +29,10 @@
      ```docker build -t [your image tag] .```
 * *Take a cup of coffe while waiting this process complete.*     
 
- ================================================================================
+================================================================================
 
- ## The next thing is docker compose 
- * # Docker compose file (*docker-compose.yml*) 
+## The next thing is docker compose 
+* # Docker compose file (*docker-compose.yml*) 
     ```    
     version: '3.2'
     services:
@@ -130,7 +130,7 @@
     * *a small diffent thing with xampp or wamp is your database host is 0.0.0.0 instead of localhost or 127.0.0.1*
 # *That all =]]~ wellcome to shit world*
 
- =================================================================================
+=================================================================================
 # Advandtage guide
 *Not complete so dont follow that*
 ## **The second way to install more extension without touch your base docker file**
