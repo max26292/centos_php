@@ -1,3 +1,5 @@
+# The first important thing that you must remember before run any command
+ ### Alway use terminal as administrator when run any build or docker-compose up command beause we are working on system drive that limit a lot of function of docker while it is runned on normal user role
 # How to use this images
 ## First of all
 * You have these config file: 
@@ -58,8 +60,7 @@
     local-net:    
         driver: bridge
     volumes:
-    mysql:
-    
+    mysql:    
     ```
 *  Now, let take a short view on this file, you should pay your attention on these values on the list below:
     1. **build**: That is a location where you execute your new docker file *(advance feature)*
