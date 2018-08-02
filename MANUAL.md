@@ -31,9 +31,11 @@
 
  ================================================================================
 
- ## The next thing is docker compose
- - ### docker compose file (*docker-compose.yml*)
+ ## The next thing is docker compose 
+ * Docker compose file (*docker-compose.yml*)
+ 
     ```
+    
     version: '3.2'
     services:
     #php host
@@ -62,7 +64,8 @@
     volumes:
     mysql:    
     ```
-*  Now, let take a short view on this file, you should pay your attention on these values on the list below:
+    
+    *  Now, let take a short view on this file, you should pay your attention on these values on the list below:
     1. **build**: That is a location where you execute your new docker file *(advance feature)*
         * That build command will effect directly to **base image** that built on previous step
     1. **image**: core of any thing you need
