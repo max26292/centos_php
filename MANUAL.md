@@ -29,10 +29,11 @@
 
  ================================================================================
 
- ## The next thing is docker compose
+ ## The next thing is docker compose 
+ * Docker compose file (*docker-compose.yml*)
  
- - ### docker compose file (*docker-compose.yml*)
     ```
+    
     version: '3.2'
     services:
     #php host
@@ -59,7 +60,8 @@
     local-net:    
         driver: bridge
     volumes:
-    mysql:    
+    mysql:
+    
     ```
     
     *  Now, let take a short view on this file, you should pay your attention on these values on the list below:
