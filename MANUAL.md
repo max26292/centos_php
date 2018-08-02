@@ -34,30 +34,32 @@
     ```
     version: '3.2'
     services:
-        #php host
-        host:
-            # build:
-            image: centos_php:latest
-            container_name: host       
-            ports:
-            - "81:80"
-            - "3306:3306"
-            environment:
-            - MYSQL_ROOT_PASSWORD: '#Hitman5066789'
-            ############### database for test
-            # -change next 3 lines below for whatever you want and use this for test
-            - MYSQL_USER: user
-            - MYSQL_PASSWORD: pass
-            - MYSQL_DATABASE: test_db
-            volumes:    
-            - ./:/var/www/html/
-            networks: 
-            - local-net     
+    #php host
+    host:
+        # build: ./dockerfile/
+        image: max26292/centos_php:latest
+        container_name: host_joombla       
+        ports:
+        - "81:80"
+        - "3306:3306"
+        environment:
+        MYSQL_ROOT_PASSWORD: '#Hitman5066789'
+        ############### database for test
+        # -change next 3 lines below for whatever you want and use this for test
+        MYSQL_USER: user
+        MYSQL_PASSWORD: pass
+        MYSQL_DATABASE: test_db
+        volumes:    
+        - ./:/var/www/html/
+        - ./mysql:/var/lib/mysql
+        networks: 
+        - local-net            
     networks:
     local-net:    
-        driver: bridge 
+        driver: bridge
     volumes:
-        - mysql:
+    mysql:
+    
     ```
 *  Now, let take a short view on this file, you should pay your attention on these values on the list below:
     1. **build**: That is a location where you execute your new docker file *(advance feature)*
