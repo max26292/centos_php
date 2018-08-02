@@ -32,10 +32,8 @@
  ================================================================================
 
  ## The next thing is docker compose 
- * Docker compose file (*docker-compose.yml*)
- 
-    ```
-    
+ * # Docker compose file (*docker-compose.yml*) 
+    ```    
     version: '3.2'
     services:
     #php host
