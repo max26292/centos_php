@@ -2,9 +2,9 @@ version: '3.2'
 services:
 #php host
   host:
-    # build:
+    # build: ./dockerfile/
     image: max26292/centos_php:latest
-    container_name: host       
+    container_name: host_joombla       
     ports:
       - "81:80"
       - "3306:3306"
@@ -17,10 +17,12 @@ services:
       MYSQL_DATABASE: test_db
     volumes:    
       - ./:/var/www/html/
+      - ./mysql:/var/lib/mysql
     networks: 
-      - local-net     
+      - local-net            
 networks:
   local-net:    
     driver: bridge
 volumes:
   mysql:
+   
