@@ -5,7 +5,7 @@ rm -f /var/lib/mysql/*
 service mysqld start
 __string=$(grep 'temporary password' /var/log/mysqld.log)
 __pass=${__string:(-12)}
-__root_pass="#Hitman5066789"
+__root_pass='#Hitman5066789'
 echo "############### Run config script #################"
 echo "##Config mysql##"
 echo "[mysqld]"                                         > /etc/my.cnf
@@ -29,12 +29,13 @@ mysqladmin -u root -p${__pass} password $__root_pass
 echo "Changed"
 echo "CREATE USER 'root'@'%' IDENTIFIED BY '$__root_pass' ;" | mysql --protocol=socket -uroot -p$__root_pass
 echo "Change root remote access"
-echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$__root_pass';" | mysql --protocol=socket -uroot -p$__root_pass
+echo $__root_pass
+echo "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '$(echo $__root_pass)';" | mysql --protocol=socket -uroot -p$__root_pass
 echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot -p$__root_pass
 echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p$__root_pass
-service mysqld restart
+service mysqld stop
 #remove password policy
-echo "uninstall plugin validate_password;" | mysql -uroot -p$__root_pass
+# echo "uninstall plugin validate_password;" | mysql -uroot -p$__root_pass
 # echo "SET GLOBAL validate_password_policy = 0 ;" | mysql -uroot -p$__root_pass
 # echo "SET GLOBAL validate_password_length = 0 ;" | mysql -uroot -p$__root_pass
 # echo "SET GLOBAL validate_password_mixed_case_count = 0 ;" | mysql -uroot -p$__root_pass
