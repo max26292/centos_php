@@ -12,18 +12,17 @@ __string=$(grep 'temporary password' /var/log/mysqld.log)
 __pass=${__string:(-12)}
 # echo ${__pass}
 ########### ROOT PASSWORD #########################
-pass='#Hitman5066789'
 echo "############## Update root password ############"
 # cp /var/lib/mysql/mysql.sock /usr/local/bin/
 # echo "$SECURE_MYSQL"
-mysqladmin -u root -p$(echo ${__pass}) password $pass
+mysqladmin -u root -p$(echo ${__pass}) password ${MYSQL_ROOT_PASSWORD}
 # echo $(echo ${pass})
 ##testing 
-mysqladmin -u root -p$pass flush-privileges
-echo "CREATE USER 'root'@'%' IDENTIFIED BY '$pass' ;" | mysql --protocol=socket -uroot -p$pass
-echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;" | mysql --protocol=socket -uroot -p$pass
-echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot -p$pass
-echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p$pass  
+mysqladmin -u root -p${MYSQL_ROOT_PASSWORD} flush-privileges
+echo "CREATE USER 'root'@'%' IDENTIFIED BY '$pass' ;" | mysql --protocol=socket -uroot -p${MYSQL_ROOT_PASSWORD}
+echo "GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;" | mysql --protocol=socket -uroot -p${MYSQL_ROOT_PASSWORD}
+echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot -p${MYSQL_ROOT_PASSWORD}
+echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p${MYSQL_ROOT_PASSWORD} 
 killall mysqld
 service mysqld stop
 echo "##Config mysql##"
@@ -35,5 +34,5 @@ echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
 echo "[client]"                                        >> /etc/my.cnf
 echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
 service mysqld restart
-service mysqld stop
+# service mysqld stop
 # service mysqld start	

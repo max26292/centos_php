@@ -1,6 +1,6 @@
 #!/bin/bash
-# /usr/local/bin/config_mysql.sh
-service mysqld start
+/usr/local/bin/config_mysql.sh
+# service mysqld start
 echo "Create testdb"
 #remove password policy
 echo "SET GLOBAL validate_password_policy = 0 ;" | mysql -uroot -p${MYSQL_ROOT_PASSWORD}
