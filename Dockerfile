@@ -8,8 +8,8 @@ ENV YUM_REPO_URL="https://dev.mysql.com/get/mysql57-community-release-el6-7.noar
     MYSQL_CUST_INCL1="/etc/mysql/conf.d" \
     MYSQL_CUST_INCL2="/etc/mysql/docker-default.d" \
     MYSQL_DEF_DAT="/var/lib/mysql" \
-    MYSQL_DEF_LOG="/var/log/mysql" \
-    MYSQL_ROOT_PASSWORD='#Hitman5066789'  
+    MYSQL_DEF_LOG="/var/log/mysql" 
+    # MYSQL_ROOT_PASSWORD='#Hitman5066789'  
 # Install basic tools for install
 ########## INSTALL httpd #########
 RUN yum -y update && yum clean all && \
@@ -65,14 +65,12 @@ COPY httpd.conf /etc/httpd/conf/
 ##############################
 ######### change permission ##
 ##############################
-# ENV MYSQL_ROOT_PASSWORD='#Hitman5066789'
-RUN chmod 755 /usr/local/bin/start.sh && \
-    chmod -v +x /usr/local/bin/start.sh &&\
-    chmod a+x /usr/local/bin/config_mysql.sh && \
-    chmod 755 /var/lib/mysql && \
-    chmod 755 /var/lib/mysql/ && \
+RUN chmod 777 /usr/local/bin/start.sh && \
+    chmod 755 /usr/local/bin/config_mysql.sh && \
+    chmod 777 /var/lib/mysql && \
+    chmod 777 /var/lib/mysql/ && \
     chmod 777 /usr/local/bin && \
-    /usr/local/bin/config_mysql.sh && \  
+   /usr/local/bin/config_mysql.sh && \  
 ###########################################################
     ln -s usr/local/bin/start.sh / # backwards compat && \
 ############# install composer for laravel ################
