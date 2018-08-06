@@ -6,6 +6,14 @@ killall mysqld
 # exec killall mysqld
 ## running install script with default root password
 echo "############### Run install script #################"
+echo "##Config mysql##"
+sed -i 's/socket=\/var\/lib\/mysql\/mysql.sock/\#socket=\/var\/lib\/mysql\/mysql.sock/g' /etc/my.cnf
+echo "[mysqld]"                                        >> /etc/my.cnf
+echo "port = 3306"                                     >> /etc/my.cnf
+echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf
+echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
+echo "[client]"                                        >> /etc/my.cnf
+echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
 rm -rf /var/lib/mysql/*
 service mysqld start
 __string=$(grep 'temporary password' /var/log/mysqld.log)
@@ -25,14 +33,14 @@ echo "DROP DATABASE IF EXISTS test ;" | mysql --protocol=socket -uroot -p${MYSQL
 echo "FLUSH PRIVILEGES ;" | mysql --protocol=socket -uroot -p${MYSQL_ROOT_PASSWORD} 
 killall mysqld
 service mysqld stop
-echo "##Config mysql##"
-sed -i 's/socket=\/var\/lib\/mysql\/mysql.sock/\#socket=\/var\/lib\/mysql\/mysql.sock/g' /etc/my.cnf
-echo "[mysqld]"                                        >> /etc/my.cnf
-echo "port = 3306"                                     >> /etc/my.cnf
+# echo "##Config mysql##"
+# sed -i 's/socket=\/var\/lib\/mysql\/mysql.sock/\#socket=\/var\/lib\/mysql\/mysql.sock/g' /etc/my.cnf
+# echo "[mysqld]"                                        >> /etc/my.cnf
+# echo "port = 3306"                                     >> /etc/my.cnf
 # echo "bind-address = 0.0.0.0"                          >> /etc/my.cnf
-echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
-echo "[client]"                                        >> /etc/my.cnf
-echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
+# echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
+# echo "[client]"                                        >> /etc/my.cnf
+# echo "socket=/usr/local/bin/mysql.sock"                >> /etc/my.cnf
 service mysqld restart
 service mysqld stop
 # service mysqld start	
