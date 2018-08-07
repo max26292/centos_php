@@ -49,7 +49,6 @@ RUN yum -y update && yum clean all && \
 ##
 ## Configure
 ##
-VOLUME /var/lib/mysql
 EXPOSE 80 3306 9000 8080
 ##### end open port
 WORKDIR /var/www/html
@@ -79,4 +78,5 @@ RUN chmod 777 /usr/local/bin/start.sh && \
 # ADDITIONAL EXTENSION #####################################
 ########## 
 #### END ADDITONAL EXTENSION
+VOLUME /var/lib/mysql
 ENTRYPOINT ["/bin/bash","start.sh"]

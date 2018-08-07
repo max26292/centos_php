@@ -3,7 +3,7 @@ services:
 #php host
   host:
     # build: ./dockerfile/
-    image: max26292/centos_php:latest
+    image: max26292/centos_php:2.1
     container_name: host_joombla       
     ports:
       - "81:80"

@@ -43,4 +43,4 @@ service mysqld stop
 # echo "SET GLOBAL validate_password_special_char_count = 0 ;" | mysql -uroot -p$__root_pass  
 # echo "SHOW VARIABLES LIKE 'validate_password%';"| mysql -uroot -p$__root_pass
 echo "#####################################################################################"
-service mysqld stop
+# service mysqld stop
