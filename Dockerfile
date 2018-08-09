@@ -1,5 +1,4 @@
 FROM centos:centos6.9
-
 ######################################
 ########## Env define ################
 ENV YUM_REPO_URL="https://dev.mysql.com/get/mysql57-community-release-el6-7.noarch.rpm" \
@@ -64,11 +63,10 @@ COPY httpd.conf /etc/httpd/conf/
 ##############################
 ######### change permission ##
 ##############################
-RUN chmod 777 /usr/local/bin/start.sh && \
-    chmod 755 /usr/local/bin/config_mysql.sh && \
-    chmod 777 /var/lib/mysql && \
-    chmod 777 /var/lib/mysql/ && \
+RUN chmod 777 /var/lib/mysql && \
     chmod 777 /usr/local/bin && \
+    chmod +x /usr/local/bin/config_mysql.sh && \
+    chmod +x /usr/local/bin/start.sh && \
    /usr/local/bin/config_mysql.sh && \  
 ###########################################################
     ln -s usr/local/bin/start.sh / # backwards compat && \
@@ -78,5 +76,5 @@ RUN chmod 777 /usr/local/bin/start.sh && \
 # ADDITIONAL EXTENSION #####################################
 ########## 
 #### END ADDITONAL EXTENSION
-VOLUME /var/lib/mysql
+
 ENTRYPOINT ["/bin/bash","start.sh"]
